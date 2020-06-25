@@ -3,11 +3,12 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
-import admin from "firebase-admin";
+import admin from 'firebase-admin';
 import schema from './schema';
 import resolvers from './resolvers';
+import dotenv from 'dotenv';
 
-require('dotenv').config();
+dotenv.config();
 const config = {
   db_user: process.env.DB_USER,
   db_pw: process.env.DB_PW,
@@ -38,14 +39,14 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const app = express();
 app.use(cors());
- 
+
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
 });
- 
+
 server.applyMiddleware({ app, path: '/graphql' });
- 
+
 app.listen({ port: 8000 }, () => {
   console.log('Apollo Server on http://localhost:8000/graphql');
 });

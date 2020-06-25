@@ -1,0 +1,22 @@
+{
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "terminal.integrated.fontFamily": "DroidSansMono Nerd Font Mono",
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.activityBar.visible": true,
+  "workbench.editor.enablePreview": false,
+  "editor.minimap.enabled": false,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
+}
