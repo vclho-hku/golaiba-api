@@ -1,3 +1,4 @@
 import userResolvers from './user';
+import bookPromotionListResolvers from './bookPromotionList';
 
-export default [userResolvers];
+export default [userResolvers, bookPromotionListResolvers];
