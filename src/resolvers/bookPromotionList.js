@@ -11,7 +11,10 @@ const Book = mongoose.model('book', BookSchema);
 export default {
   Query: {
     bookPromotionList: async (parent, { key }, { models }) => {
-      return [];
+      let newPublishList = await BookPromotionList.findOne({
+        key: 'newPublishList',
+      });
+      return newPublishList.books;
     },
   },
   Mutation: {
