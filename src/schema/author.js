@@ -1,8 +1,6 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
-  scalar Date
-
   extend type Query {
     author(id: ID!): Author
   }
@@ -13,7 +11,7 @@ export default gql`
 
   type Author {
     name: String
-    dateOfBirth: String
+    dateOfBirth: Date
     nationality: String
   }
 

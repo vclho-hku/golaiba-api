@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 
 import userSchema from './user';
 import authorSchema from './author';
+import dateSchema from './date';
 import bookPromotionListSchema from './bookPromotionList';
 
 const linkSchema = gql`
@@ -18,4 +19,10 @@ const linkSchema = gql`
   }
 `;
 
-export default [linkSchema, userSchema, bookPromotionListSchema, authorSchema];
+export default [
+  linkSchema,
+  userSchema,
+  bookPromotionListSchema,
+  authorSchema,
+  dateSchema,
+];
