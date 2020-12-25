@@ -2,7 +2,10 @@ import { Schema } from 'mongoose';
 
 var AuthorSchema = new Schema(
   {
-    name: String,
+    name: {
+      en: String,
+      zh_hk: String,
+    },
     dateOfBirth: Date,
     nationality: String,
   },

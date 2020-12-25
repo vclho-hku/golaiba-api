@@ -10,9 +10,10 @@ export default {
     },
   },
   Mutation: {
-    createAuthor: async (parent, { data }, { models }) => {
-      console.log(data);
-      let author = await new Author(data);
+    createAuthor: async (parent, { name, data }, { models }) => {
+      let payload = data;
+      payload.name = name;
+      let author = await new Author(payload);
       await author.save();
       return author;
     },

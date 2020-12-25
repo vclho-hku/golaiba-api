@@ -6,17 +6,26 @@ export default gql`
   }
 
   extend type Mutation {
-    createAuthor(data: authorData!): Author!
+    createAuthor(name: multiLang!, data: authorData): Author!
   }
 
   type Author {
-    name: String
+    name: MultiLang
     dateOfBirth: Date
     nationality: String
   }
 
+  type MultiLang {
+    en: String
+    zh_hk: String
+  }
+
+  input multiLang {
+    en: String
+    zh_hk: String
+  }
+
   input authorData {
-    name: String
     dateOfBirth: String
     nationality: String
   }
