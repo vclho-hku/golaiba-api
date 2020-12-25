@@ -7,7 +7,7 @@ export default gql`
   }
 
   extend type Mutation {
-    createUser(userInfo: inputUserData!): User!
+    createUser(data: userData!): User!
   }
 
   type User {
@@ -17,7 +17,7 @@ export default gql`
     email: String!
   }
 
-  input inputUserData {
+  input userData {
     uid: String
     name: String
     email: String

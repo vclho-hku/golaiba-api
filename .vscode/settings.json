@@ -4,6 +4,10 @@
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
   "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.renderWhitespace": "all",
   "prettier.tabWidth": 2,
   "prettier.useTabs": false,

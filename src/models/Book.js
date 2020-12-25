@@ -1,13 +1,26 @@
-import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 
-var BookSchema = new mongoose.Schema(
+// isbn: String,
+// title: String,
+// subtitle: String,
+// authors: [person_id],
+// translator: [person_id],
+// publisher: id,
+// publishDate: date,
+// imageUrl: String,
+// collection: id,
+
+var BookSchema = new Schema(
   {
     isbn: String,
     title: String,
-    author: String,
-    publisher: String,
-    publishYear: String,
-    bookCoverImgUrl: String,
+    subtitle: String,
+    authors: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Author',
+      },
+    ],
   },
   {
     timestamps: true,
