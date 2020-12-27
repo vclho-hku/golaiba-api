@@ -9,16 +9,6 @@ export default gql`
     addPromotionBook(key: String!, bookInfo: inputBookData!): Book!
   }
 
-  type Book {
-    _id: ID!
-    isbn: String!
-    title: String!
-    author: String!
-    publisher: String
-    publishYear: String
-    bookCoverImgUrl: String
-  }
-
   input inputBookData {
     isbn: String
     title: String
