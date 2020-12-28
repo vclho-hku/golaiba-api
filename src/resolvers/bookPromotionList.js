@@ -24,18 +24,20 @@ export default {
   Mutation: {
     addPromotionBook: async (parent, { key, bookId }, { models }) => {
       const book = await Book.findById(bookId);
-      const promotionList = await BookPromotionList.findOneAndUpdate(
-        { key },
-        { $push: { books: book } },
-        { new: true, useFindAndModify: false },
-      ).populate({
+      let promotionList = await BookPromotionList.findOne({ key });
+      if (promotionList.books.indexOf(bookId) === -1) {
+        promotionList.books.push(book);
+        await promotionList.save();
+      }
+
+      let test = await BookPromotionList.findOne({ key }).populate({
         path: 'books',
         populate: {
           path: 'authors',
         },
       });
-      console.log(promotionList.books[0].authors);
-      return promotionList;
+      console.log(test.books);
+      return test;
     },
   },
 };
