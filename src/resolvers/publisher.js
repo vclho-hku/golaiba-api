@@ -11,7 +11,10 @@ export default {
   },
   Mutation: {
     createPublisher: async (parent, { name, data }, { models }) => {
-      let payload = data;
+      let payload = {};
+      if (data) {
+        payload = data;
+      }
       payload.name = name;
       let publisher = await new Publisher(payload);
       await publisher.save();

@@ -12,4 +12,16 @@ export default gql`
     zh_hk: String
     ja_jp: String
   }
+
+  type ImageUrl {
+    small: String
+    medium: String
+    large: String
+  }
+
+  input imageUrl {
+    small: String
+    medium: String
+    large: String
+  }
 `;

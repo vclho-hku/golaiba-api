@@ -7,7 +7,12 @@ export default gql`
   }
 
   extend type Mutation {
-    createBook(data: bookData!): Book!
+    createBook(
+      data: bookData!
+      imageUrl: imageUrl
+      authorId: String
+      publisherId: String
+    ): Book!
   }
 
   type Book {
@@ -15,15 +20,22 @@ export default gql`
     isbn: String
     title: String
     subtitle: String
+    description: String
+    language: String
+    pageCount: Int
+    publishDate: Date
+    imageUrl: ImageUrl
     authors: [Author]
-    publisher: [Publisher]
+    publisher: Publisher
   }
 
   input bookData {
     isbn: String
     title: String
     subtitle: String
-    authorId: String
-    publisherId: String
+    description: String
+    language: String
+    pageCount: Int
+    publishDate: Date
   }
 `;

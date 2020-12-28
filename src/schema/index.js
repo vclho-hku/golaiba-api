@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express';
-import multiLangSchema from './multiLang';
+import shareSchema from './share';
 import userSchema from './user';
 import authorSchema from './author';
 import dateSchema from './date';
@@ -23,7 +23,7 @@ const linkSchema = gql`
 
 export default [
   linkSchema,
-  multiLangSchema,
+  shareSchema,
   userSchema,
   bookPromotionListSchema,
   authorSchema,
