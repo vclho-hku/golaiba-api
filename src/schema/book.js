@@ -11,16 +11,19 @@ export default gql`
   }
 
   type Book {
-    _id: ID
+    id: ID
     isbn: String
     title: String
     subtitle: String
     authors: [Author]
+    publisher: [Publisher]
   }
 
   input bookData {
     isbn: String
     title: String
     subtitle: String
+    authorId: String
+    publisherId: String
   }
 `;

@@ -1,19 +1,19 @@
 import { Schema } from 'mongoose';
 
-var AuthorSchema = new Schema(
+var PublisherSchema = new Schema(
   {
     name: {
       en_us: String,
       zh_hk: String,
       ja_jp: String,
     },
-    dateOfBirth: Date,
     introduction: String,
-    nationality: String,
+    foundedDate: Date,
+    officialWebsite: String,
   },
   {
     timestamps: true,
   },
 );
 
-export { AuthorSchema };
+export { PublisherSchema };

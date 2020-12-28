@@ -11,7 +11,10 @@ export default {
   },
   Mutation: {
     createAuthor: async (parent, { name, data }, { models }) => {
-      let payload = data;
+      let payload = {};
+      if (data) {
+        payload = data;
+      }
       payload.name = name;
       let author = await new Author(payload);
       await author.save();

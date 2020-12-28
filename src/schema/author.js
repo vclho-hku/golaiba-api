@@ -10,23 +10,16 @@ export default gql`
   }
 
   type Author {
+    id: ID
     name: MultiLang
     dateOfBirth: Date
+    introduction: String
     nationality: String
-  }
-
-  type MultiLang {
-    en: String
-    zh_hk: String
-  }
-
-  input multiLang {
-    en: String
-    zh_hk: String
   }
 
   input authorData {
     dateOfBirth: String
+    introduction: String
     nationality: String
   }
 `;

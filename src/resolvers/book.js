@@ -11,7 +11,9 @@ export default {
       return books;
     },
     book: async (parent, { id }, { models }) => {
-      let book = await Book.findById(id).populate('authors');
+      let book = await Book.findById(id)
+        .populate('authors')
+        .populate('publisher');
       return book;
     },
   },
