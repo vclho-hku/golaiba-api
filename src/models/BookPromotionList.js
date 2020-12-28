@@ -1,10 +1,14 @@
-import mongoose from 'mongoose';
-import { BookSchema } from './Book';
+import { Schema } from 'mongoose';
 
-var BookPromotionListSchema = new mongoose.Schema(
+var BookPromotionListSchema = new Schema(
   {
     key: String,
-    books: [BookSchema],
+    books: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'book',
+      },
+    ],
   },
   {
     timestamps: true,

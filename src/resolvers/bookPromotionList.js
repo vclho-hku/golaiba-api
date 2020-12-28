@@ -12,19 +12,30 @@ export default {
   Query: {
     bookPromotionList: async (parent, { key }, { models }) => {
       let newPublishList = await BookPromotionList.findOne({
-        key: 'newPublishList',
+        key,
       });
-      return newPublishList.books;
+      return newPublishList;
+    },
+    allBookPromotionList: async (parent, {}, { models }) => {
+      let allPromotionList = await BookPromotionList.find();
+      return allPromotionList;
     },
   },
   Mutation: {
-    addPromotionBook: async (parent, { key, bookInfo }, { models }) => {
-      let book = new Book(bookInfo);
-      await BookPromotionList.findOneAndUpdate(
+    addPromotionBook: async (parent, { key, bookId }, { models }) => {
+      const book = await Book.findById(bookId);
+      const promotionList = await BookPromotionList.findOneAndUpdate(
         { key },
         { $push: { books: book } },
-      );
-      return bookInfo;
+        { new: true, useFindAndModify: false },
+      ).populate({
+        path: 'books',
+        populate: {
+          path: 'authors',
+        },
+      });
+      console.log(promotionList.books[0].authors);
+      return promotionList;
     },
   },
 };
