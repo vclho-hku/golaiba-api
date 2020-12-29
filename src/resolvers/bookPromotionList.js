@@ -30,14 +30,15 @@ export default {
         await promotionList.save();
       }
 
-      let test = await BookPromotionList.findOne({ key }).populate({
+      let updatedPromotionList = await BookPromotionList.findOne({
+        key,
+      }).populate({
         path: 'books',
         populate: {
           path: 'authors',
         },
       });
-      console.log(test.books);
-      return test;
+      return updatedPromotionList;
     },
   },
 };
