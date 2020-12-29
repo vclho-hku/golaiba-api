@@ -17,6 +17,12 @@ export default {
         .populate('publisher');
       return book;
     },
+    bookByISBN: async (parent, { isbn }, { models }) => {
+      let book = await Book.findOne({ isbn })
+        .populate('authors')
+        .populate('publisher');
+      return book;
+    },
   },
   Mutation: {
     createBook: async (
