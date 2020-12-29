@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    bookPromotionList(key: String!): [Book!]
+    bookPromotionList(key: String!): BookPromotionList
     allBookPromotionList: [BookPromotionList!]
   }
 

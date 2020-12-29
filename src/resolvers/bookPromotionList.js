@@ -11,13 +11,24 @@ const Book = mongoose.model('book', BookSchema);
 export default {
   Query: {
     bookPromotionList: async (parent, { key }, { models }) => {
-      let newPublishList = await BookPromotionList.findOne({
+      let promotionList = await BookPromotionList.findOne({
         key,
+      }).populate({
+        path: 'books',
+        populate: {
+          path: 'authors',
+        },
       });
-      return newPublishList;
+      // console.log(promotionList);
+      return promotionList;
     },
     allBookPromotionList: async (parent, {}, { models }) => {
-      let allPromotionList = await BookPromotionList.find();
+      let allPromotionList = await BookPromotionList.find().populate({
+        path: 'books',
+        populate: {
+          path: 'authors',
+        },
+      });
       return allPromotionList;
     },
   },
