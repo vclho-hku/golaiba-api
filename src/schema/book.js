@@ -4,7 +4,6 @@ export default gql`
   extend type Query {
     books: [Book!]
     book(id: ID!): Book
-    bookByISBN(isbn: String!): Book
   }
 
   extend type Mutation {
