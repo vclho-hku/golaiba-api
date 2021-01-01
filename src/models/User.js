@@ -1,10 +1,11 @@
-import mongoose from 'mongoose';
+import { Schema } from 'mongoose';
 
-var UserSchema = new mongoose.Schema(
+var UserSchema = new Schema(
   {
-    uid: String,
-    name: String,
-    email: String,
+    uid: { type: String, unique: true, required: true },
+    name: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
+    avatarImgUrl: { type: String },
   },
   {
     timestamps: true,

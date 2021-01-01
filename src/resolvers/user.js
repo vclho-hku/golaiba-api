@@ -8,7 +8,11 @@ export default {
       let users = await User.find();
       return users;
     },
-    user: async (parent, { uid }, { models }) => {
+    user: async (parent, { id }, { models }) => {
+      let user = await User.findOne({ id });
+      return user;
+    },
+    userByUID: async (parent, { uid }, { models }) => {
       let user = await User.findOne({ uid });
       return user;
     },

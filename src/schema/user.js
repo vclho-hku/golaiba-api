@@ -3,7 +3,8 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     users: [User!]
-    user(uid: ID!): User
+    user(id: ID!): User
+    userByUID(uid: String!): User
   }
 
   extend type Mutation {
@@ -15,6 +16,7 @@ export default gql`
     uid: String!
     name: String!
     email: String!
+    avatarImgUrl: String!
   }
 
   input userData {
