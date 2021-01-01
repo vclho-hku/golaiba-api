@@ -6,6 +6,12 @@ var UserSchema = new Schema(
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     avatarImgUrl: { type: String },
+    wishlist: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'book',
+      },
+    ],
   },
   {
     timestamps: true,

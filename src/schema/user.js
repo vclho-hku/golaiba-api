@@ -17,6 +17,7 @@ export default gql`
     name: String!
     email: String!
     avatarImgUrl: String!
+    wishlist: [Book]
   }
 
   input userData {

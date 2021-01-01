@@ -19,8 +19,12 @@ export default {
   },
   Mutation: {
     createUser: async (parent, { data }, { models }) => {
-      let user = await new User(data);
-      await user.save();
+      const uid = data.uid;
+      let user = await User.findOne({ uid });
+      if (!user) {
+        user = await new User(data);
+        await user.save();
+      }
       return user;
     },
   },
