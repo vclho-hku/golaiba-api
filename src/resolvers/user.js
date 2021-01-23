@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
+import { BookSchema } from '../models/Book.js';
 import { UserSchema } from '../models/User.js';
 const User = mongoose.model('user', UserSchema);
+const Book = mongoose.model('book', BookSchema);
 
 export default {
   Query: {
@@ -24,6 +26,16 @@ export default {
       if (!user) {
         user = await new User(data);
         await user.save();
+      }
+      return user;
+    },
+    addWishList: async (parent, { uid, bookId }, { models }) => {
+      let user = await User.findOne({ uid });
+      let found = user.wishlist.indexOf(bookId);
+      if (found === -1) {
+        let book = await Book.findById(bookId);
+        user.wishlist.push(book);
+        user.save();
       }
       return user;
     },

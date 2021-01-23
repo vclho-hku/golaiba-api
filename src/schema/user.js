@@ -9,6 +9,7 @@ export default gql`
 
   extend type Mutation {
     createUser(data: userData!): User!
+    addWishList(uid: String!, bookId: String!): User
   }
 
   type User {
