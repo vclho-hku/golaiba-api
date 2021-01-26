@@ -9,7 +9,8 @@ export default gql`
 
   extend type Mutation {
     createUser(data: userData!): User!
-    addWishList(uid: String!, bookId: String!): User
+    addWishList(uid: String!, bookId: String!): User!
+    removeWishList(uid: String!, bookId: String!): User!
   }
 
   type User {

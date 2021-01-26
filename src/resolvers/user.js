@@ -39,5 +39,14 @@ export default {
       }
       return user;
     },
+    removeWishList: async (parent, { uid, bookId }, { models }) => {
+      let user = await User.findOne({ uid });
+      let index = user.wishlist.indexOf(bookId);
+      if (index !== -1) {
+        user.wishlist.splice(index, 1);
+        user.save();
+      }
+      return user;
+    },
   },
 };
