@@ -15,7 +15,7 @@ export default {
       return user;
     },
     userByUID: async (parent, { uid }, { models }) => {
-      let user = await User.findOne({ uid });
+      let user = await User.findOne({ uid }).populate('wishlist');
       return user;
     },
   },
