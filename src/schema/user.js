@@ -18,7 +18,7 @@ export default gql`
     uid: String!
     name: String!
     email: String!
-    avatarImgUrl: String!
+    avatarImgUrl: String
     wishlist: [Book]
   }
 

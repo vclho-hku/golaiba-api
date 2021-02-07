@@ -22,10 +22,11 @@ export default {
   Mutation: {
     createUser: async (parent, { data }, { models }) => {
       const uid = data.uid;
-      let user = await User.findOne({ uid });
+      let user = await User.findOne({ uid }).populate('wishlist');
       if (!user) {
         user = await new User(data);
         await user.save();
+        user = await User.findOne({ uid }).populate('wishlist');
       }
       return user;
     },
