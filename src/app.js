@@ -46,6 +46,10 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const app = express();
 app.use(cors());
 
+app.get('/health_check', function (req, res) {
+  res.send('ok');
+});
+
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
