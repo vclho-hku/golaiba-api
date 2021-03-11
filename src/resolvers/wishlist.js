@@ -7,7 +7,19 @@ const Book = mongoose.model('book', BookSchema);
 export default {
   Query: {
     getWishlist: async (parent, { id }, { models }) => {
-      let user = await User.findById(id).populate('wishlist');
+      let user = await User.findById(id)
+        .populate({
+          path: 'wishlist',
+          populate: {
+            path: 'authors',
+          },
+        })
+        .populate({
+          path: 'wishlist',
+          populate: {
+            path: 'publisher',
+          },
+        });
       return user.wishlist;
     },
   },
