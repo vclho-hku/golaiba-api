@@ -11,7 +11,7 @@ export default {
       return users;
     },
     user: async (parent, { id }, { models }) => {
-      let user = await User.findOne({ id });
+      let user = await User.findById(id);
       return user;
     },
     userByUID: async (parent, { uid }, { models }) => {

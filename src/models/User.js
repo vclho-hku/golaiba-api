@@ -5,7 +5,16 @@ var UserSchema = new Schema(
     uid: { type: String, unique: true, required: true },
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
-    avatarImgUrl: { type: String },
+    birthDate: Date,
+    gender: String,
+    region: { type: String, default: 'hk' },
+    langauge: { type: String, default: 'zh_hk' },
+    isSentNewsletter: { type: Boolean, default: false },
+    avatarImgUrl: {
+      small: { type: String, default: null },
+      medium: { type: String, default: null },
+      large: { type: String, default: null },
+    },
     wishlist: [
       {
         type: Schema.Types.ObjectId,
