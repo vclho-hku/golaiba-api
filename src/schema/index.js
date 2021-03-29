@@ -7,6 +7,7 @@ import bookSchema from './book';
 import publisherSchema from './publisher';
 import bookPromotionListSchema from './bookPromotionList';
 import wishListSchema from './wishlist';
+import userBookshelfSchema from './userBookshelf';
 
 const linkSchema = gql`
   type Query {
@@ -32,4 +33,5 @@ export default [
   bookSchema,
   publisherSchema,
   wishListSchema,
+  userBookshelfSchema,
 ];

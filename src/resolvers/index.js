@@ -5,6 +5,7 @@ import dateResolvers from './date';
 import publisherResolvers from './publisher';
 import bookPromotionListResolvers from './bookPromotionList';
 import wishListResolvers from './wishlist';
+import userBookshelfResolvers from './userBookshelf';
 
 export default [
   userResolvers,
@@ -14,4 +15,5 @@ export default [
   bookResolvers,
   publisherResolvers,
   wishListResolvers,
+  userBookshelfResolvers,
 ];
