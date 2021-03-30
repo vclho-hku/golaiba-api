@@ -2,17 +2,19 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    getBookshelf(userId: String!): [Book]
+    getBookshelf(userId: ID!): [Book]
+    getUserBook(userId: ID!, bookId: ID!): UserBook
+    getUserBookshelf(userId: ID!): [UserBook]
   }
 
   extend type Mutation {
-    addToBookshelf(userId: String!, bookId: String!): userBook!
+    addToBookshelf(userId: ID!, bookId: ID!): UserBook
   }
 
-  type userBook {
+  type UserBook {
     id: ID!
     userId: ID
-    bookId: ID
+    book: [Book]
     readingStatus: String
     status: String
   }

@@ -16,6 +16,22 @@ export default {
     getBookshelf: async (parent, args, { models }) => {
       return [];
     },
+    getUserBook: async (parent, { userId, bookId }, { models }) => {
+      let userBook = await UserBookshelf.findOne({
+        userId: userId,
+        bookId: bookId,
+        status: 'active',
+      });
+      return userBook;
+    },
+    getUserBookshelf: async (parent, { userId }, { models }) => {
+      let userBookshelf = await UserBookshelf.findOne({
+        userId: userId,
+        status: 'active',
+      }).populate('bookId');
+      console.log(userBookshelf);
+      return [];
+    },
   },
   Mutation: {
     addToBookshelf: async (parent, { userId, bookId }, { models }) => {
