@@ -25,12 +25,11 @@ export default {
       return userBook;
     },
     getUserBookshelf: async (parent, { userId }, { models }) => {
-      let userBookshelf = await UserBookshelf.findOne({
+      let userBookshelf = await UserBookshelf.find({
         userId: userId,
         status: 'active',
       }).populate('bookId');
-      console.log(userBookshelf);
-      return [];
+      return userBookshelf;
     },
   },
   Mutation: {
