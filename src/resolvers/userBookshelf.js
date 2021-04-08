@@ -29,13 +29,22 @@ export default {
         userId: userId,
         status: 'active',
       }).populate('bookId');
-      return userBookshelf;
+      let result = userBookshelf.map((inputBook) => {
+        // inputBook['book'] = inputBook.bookId;
+        // delete inputBook.bookId;
+        var newBook = {
+          book: inputBook.bookId,
+          readingStatus: inputBook.readingStatus,
+        };
+        return newBook;
+      });
+      return result;
     },
   },
   Mutation: {
     addToBookshelf: async (parent, { userId, bookId }, { models }) => {
-      let user = await User.findById(userId);
-      let book = await Book.findById(bookId);
+      await User.findById(userId);
+      await Book.findById(bookId);
 
       let userBook = await UserBookshelf.findOne({
         userId: userId,
@@ -49,6 +58,38 @@ export default {
         });
         await userBook.save();
       }
+      return userBook;
+    },
+    removeFromBookshelf: async (parent, { userId, bookId }, { models }) => {
+      await User.findById(userId);
+      await Book.findById(bookId);
+
+      let userBook = await UserBookshelf.findOne({
+        userId: userId,
+        bookId: bookId,
+        status: 'active',
+      });
+      userBook.status = 'removed';
+      userBook.save();
+
+      return userBook;
+    },
+    updateUserBookReadingStatus: async (
+      parent,
+      { userId, bookId, readingStatus },
+      { models },
+    ) => {
+      await User.findById(userId);
+      await Book.findById(bookId);
+
+      let userBook = await UserBookshelf.findOne({
+        userId: userId,
+        bookId: bookId,
+        status: 'active',
+      });
+      userBook.readingStatus = readingStatus;
+      userBook.save();
+
       return userBook;
     },
   },

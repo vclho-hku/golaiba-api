@@ -9,12 +9,18 @@ export default gql`
 
   extend type Mutation {
     addToBookshelf(userId: ID!, bookId: ID!): UserBook
+    removeFromBookshelf(userId: ID!, bookId: ID!): UserBook
+    updateUserBookReadingStatus(
+      userId: ID!
+      bookId: ID!
+      readingStatus: String
+    ): UserBook
   }
 
   type UserBook {
     id: ID!
     userId: ID
-    book: [Book]
+    book: Book
     readingStatus: String
     status: String
   }
