@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
   extend type Query {
-    getUserBookReveiw(userId: ID!, bookId: ID!): UserBookReview
+    getUserBookReview(userId: ID!, bookId: ID!): UserBookReview
   }
 
   extend type Mutation {
@@ -10,7 +10,7 @@ export default gql`
       userId: ID!
       bookId: ID!
       userName: String
-      rating: Int
+      rating: Float
       review: String
     ): UserBookReview
   }
@@ -20,7 +20,7 @@ export default gql`
     userId: ID
     bookId: ID
     userName: String
-    rating: Int
+    rating: Float
     review: String
   }
 `;

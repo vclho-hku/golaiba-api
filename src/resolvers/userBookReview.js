@@ -12,7 +12,7 @@ const UserBookReview = mongoose.model(
 
 export default {
   Query: {
-    getUserBookReveiw: async (parent, { userId, bookId }, { models }) => {
+    getUserBookReview: async (parent, { userId, bookId }, { models }) => {
       let userBookReview = await UserBookReview.findOne({
         userId: userId,
         bookId: bookId,
@@ -32,7 +32,6 @@ export default {
       let userBookReview = await UserBookReview.findOne({
         userId: userId,
         bookId: bookId,
-
         status: 'active',
       });
       if (userBookReview == null) {
