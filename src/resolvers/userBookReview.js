@@ -28,7 +28,7 @@ export default {
       { models },
     ) => {
       await User.findById(userId);
-      await Book.findById(bookId);
+      let book = await Book.findById(bookId);
       let userBookReview = await UserBookReview.findOne({
         userId: userId,
         bookId: bookId,
@@ -44,6 +44,11 @@ export default {
           status: 'active',
         });
         userBookReview.save();
+        let newBookRating =
+          (book.rating * book.ratingCount + rating) / (book.ratingCount + 1);
+        book.rating = newBookRating.toFixed(2);
+        book.ratingCount = book.ratingCount + 1;
+        book.save();
       }
       return userBookReview;
     },

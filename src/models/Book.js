@@ -9,8 +9,8 @@ var BookSchema = new Schema(
     language: String,
     pageCount: Number,
     publishDate: Date,
-    rating: Number,
-    ratingCount: Number,
+    rating: { type: Number, default: 0 },
+    ratingCount: { type: Number, default: 0 },
     imageUrl: {
       small: String,
       medium: String,
