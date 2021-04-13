@@ -31,6 +31,7 @@
     "prettier": "2.0.5"
   },
   "scripts": {
+    "dev": "nodemon --exec babel-node src/app.js",
     "start": "nodemon --exec babel-node src/app.js",
     "build": "babel src --out-dir dist"
   },
