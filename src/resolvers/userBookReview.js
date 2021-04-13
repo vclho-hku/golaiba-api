@@ -24,20 +24,28 @@ export default {
   Mutation: {
     addUserBookReview: async (
       parent,
-      { userId, bookId, rating, review },
+      { userId, bookId, userName, rating, review },
       { models },
     ) => {
       await User.findById(userId);
       await Book.findById(bookId);
+      let userBookReview = await UserBookReview.findOne({
+        userId: userId,
+        bookId: bookId,
 
-      let userBookReview = await new UserBookReview({
-        userId,
-        bookId,
-        rating,
-        review,
         status: 'active',
       });
-      userBookReview.save();
+      if (userBookReview == null) {
+        userBookReview = await new UserBookReview({
+          userId,
+          bookId,
+          userName,
+          rating,
+          review,
+          status: 'active',
+        });
+        userBookReview.save();
+      }
       return userBookReview;
     },
   },

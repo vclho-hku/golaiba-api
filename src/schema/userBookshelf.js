@@ -4,6 +4,7 @@ export default gql`
   extend type Query {
     getBookshelf(userId: ID!): [Book]
     getUserBook(userId: ID!, bookId: ID!): UserBook
+    getUserBookDetails(userBookId: ID!): UserBook
     getUserBookshelf(userId: ID!): [UserBook]
   }
 

@@ -9,14 +9,17 @@ export default gql`
     addUserBookReview(
       userId: ID!
       bookId: ID!
+      userName: String
       rating: Int
       review: String
     ): UserBookReview
   }
 
   type UserBookReview {
+    id: ID
     userId: ID
     bookId: ID
+    userName: String
     rating: Int
     review: String
   }

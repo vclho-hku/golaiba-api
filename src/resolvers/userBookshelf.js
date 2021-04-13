@@ -24,6 +24,17 @@ export default {
       });
       return userBook;
     },
+    getUserBookDetails: async (parent, { userBookId }, { models }) => {
+      let userBookDetails = await UserBookshelf.findById(userBookId).populate(
+        'bookId',
+      );
+      const newBookDetails = {
+        id: userBookDetails.id,
+        book: userBookDetails.bookId,
+        readingStatus: userBookDetails.readingStatus,
+      };
+      return newBookDetails;
+    },
     getUserBookshelf: async (parent, { userId }, { models }) => {
       let userBookshelf = await UserBookshelf.find({
         userId: userId,
@@ -33,6 +44,7 @@ export default {
         // inputBook['book'] = inputBook.bookId;
         // delete inputBook.bookId;
         var newBook = {
+          id: inputBook.id,
           book: inputBook.bookId,
           readingStatus: inputBook.readingStatus,
         };
