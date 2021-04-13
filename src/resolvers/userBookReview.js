@@ -44,11 +44,13 @@ export default {
           status: 'active',
         });
         userBookReview.save();
-        let newBookRating =
-          (book.rating * book.ratingCount + rating) / (book.ratingCount + 1);
-        book.rating = newBookRating.toFixed(2);
-        book.ratingCount = book.ratingCount + 1;
-        book.save();
+        if (rating) {
+          let newBookRating =
+            (book.rating * book.ratingCount + rating) / (book.ratingCount + 1);
+          book.rating = newBookRating.toFixed(2);
+          book.ratingCount = book.ratingCount + 1;
+          book.save();
+        }
       }
       return userBookReview;
     },

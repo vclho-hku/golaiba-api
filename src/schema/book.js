@@ -23,6 +23,8 @@ export default gql`
     description: String
     language: String
     pageCount: Int
+    rating: Float
+    ratingCount: Int
     publishDate: Date
     imageUrl: ImageUrl
     authors: [Author]
