@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     getUserBookReview(userId: ID!, bookId: ID!): UserBookReview
+    getBookReview(bookId: ID!, offset: Int, limit: Int): [UserBookReview]
   }
 
   extend type Mutation {

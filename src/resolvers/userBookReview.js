@@ -20,6 +20,24 @@ export default {
       });
       return userBookReview;
     },
+    getBookReview: async (parent, { bookId, limit, offset }, { models }) => {
+      let reviewlimit = 1;
+      let reviewOffset = 0;
+      if (limit && limit > 0 && limit < 50) {
+        reviewlimit = limit;
+      }
+      if (offset && offset > 0) {
+        reviewOffset = offset;
+      }
+
+      let userBookReview = await UserBookReview.find({
+        bookId: bookId,
+        status: 'active',
+      })
+        .skip(reviewOffset)
+        .limit(reviewlimit);
+      return userBookReview;
+    },
   },
   Mutation: {
     addUserBookReview: async (
