@@ -7,6 +7,7 @@ import admin from 'firebase-admin';
 import schema from './schema';
 import resolvers from './resolvers';
 import dotenv from 'dotenv';
+import elasticClient from './elasticsearch-client';
 
 dotenv.config();
 const config = {
@@ -39,6 +40,42 @@ const config = {
 const mongoDB = `mongodb+srv://${config.db_user}:${config.db_pw}@${config.db_path}?retryWrites=true&w=majority`;
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true });
 mongoose.Promise = global.Promise;
+
+// const elasticClient = new Client({
+//   node:
+//     'https://search-golaiba-dev-es-a2dpnpq3jbbmbhn73k23cg7hm4.us-east-1.es.amazonaws.com',
+//   auth: {
+//     username: 'golaiba-dev',
+//     password: 'Golaiba-dev0336',
+//   },
+// });
+
+// const getResult = async () => {
+//   const result = await elasticClient.search({
+//     index: 'movies',
+//     body: {
+//       query: {
+//         match: { year: 2010 },
+//       },
+//     },
+//   });
+//   console.log(result);
+//   console.log(result.body.hits.hits);
+// };
+// const getResult = async () => {
+//   const result = await elasticClient.index({
+//     index: 'test',
+//     id: '1',
+//     body: {
+//       character: 'Ned Stark',
+//       quote: 'Winter is coming.',
+//       times: 0,
+//     },
+//   });
+//   console.log(result);
+// };
+
+// getResult();
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
