@@ -5,6 +5,7 @@ export default gql`
     users: [User!]
     user(id: ID!): User
     userByUID(uid: String!): User
+    getUserBySearch(keywords: String!): [User]
   }
 
   extend type Mutation {
@@ -12,10 +13,11 @@ export default gql`
   }
 
   type User {
-    id: ID!
-    uid: String!
-    name: String!
-    email: String!
+    id: ID
+    _id: ID
+    uid: String
+    name: String
+    email: String
     wishlist: [Book]
   }
 

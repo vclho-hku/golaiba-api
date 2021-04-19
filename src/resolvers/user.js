@@ -3,6 +3,7 @@ import { BookSchema } from '../models/Book.js';
 import { UserSchema } from '../models/User.js';
 const User = mongoose.model('user', UserSchema);
 const Book = mongoose.model('book', BookSchema);
+import elasticClient from '../elasticsearch-client';
 
 export default {
   Query: {
@@ -17,6 +18,29 @@ export default {
     userByUID: async (parent, { uid }, { models }) => {
       let user = await User.findOne({ uid }).populate('wishlist');
       return user;
+    },
+    getUserBySearch: async (parent, { keywords }, { models }) => {
+      let searchResult = await elasticClient.search({
+        index: 'users',
+        body: {
+          query: {
+            bool: {
+              should: [
+                { match: { 'user.email': keywords } },
+                { match: { 'user.name': keywords } },
+              ],
+            },
+          },
+        },
+      });
+
+      let result = [];
+      if (searchResult.body.hits.hits) {
+        result = searchResult.body.hits.hits.map((obj) => {
+          return obj._source.user;
+        });
+      }
+      return result;
     },
   },
   Mutation: {
