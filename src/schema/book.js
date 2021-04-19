@@ -18,6 +18,7 @@ export default gql`
 
   type Book {
     id: ID
+    _id: ID
     isbn: String
     title: String
     subtitle: String
