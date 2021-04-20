@@ -7,7 +7,17 @@ const FollowList = mongoose.model('followList', FollowListSchema, 'followList');
 export default {
   Query: {
     getFollower: async (parent, { userId }, { models }) => {
-      return [];
+      let user = await User.findById(userId);
+      let followList = await FollowList.find({
+        followee: user.id,
+        status: 'active',
+      })
+        .populate('follower')
+        .select('follower -_id');
+      let followerList = followList.map((data) => {
+        return data.follower;
+      });
+      return followerList;
     },
     getFollowee: async (parent, { userId }, { models }) => {
       let user = await User.findById(userId);
