@@ -7,6 +7,7 @@ import bookPromotionListResolvers from './bookPromotionList';
 import wishListResolvers from './wishlist';
 import userBookshelfResolvers from './userBookshelf';
 import userBookReviewResolvers from './userBookReview';
+import followListResolvers from './followList';
 
 export default [
   userResolvers,
@@ -18,4 +19,5 @@ export default [
   wishListResolvers,
   userBookshelfResolvers,
   userBookReviewResolvers,
+  followListResolvers,
 ];

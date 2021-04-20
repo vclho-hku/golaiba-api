@@ -19,7 +19,7 @@ export default {
       let user = await User.findOne({ uid }).populate('wishlist');
       return user;
     },
-    getUserBySearch: async (parent, { keywords }, { models }) => {
+    getUserBySearch: async (parent, { userId, keywords }, { models }) => {
       let searchResult = await elasticClient.search({
         index: 'users',
         body: {
@@ -38,6 +38,9 @@ export default {
       if (searchResult.body.hits.hits) {
         result = searchResult.body.hits.hits.map((obj) => {
           return obj._source.user;
+        });
+        result = result.filter((user) => {
+          return user._id != userId;
         });
       }
       return result;

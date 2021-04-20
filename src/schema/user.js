@@ -5,7 +5,7 @@ export default gql`
     users: [User!]
     user(id: ID!): User
     userByUID(uid: String!): User
-    getUserBySearch(keywords: String!): [User]
+    getUserBySearch(userId: ID!, keywords: String!): [User]
   }
 
   extend type Mutation {
