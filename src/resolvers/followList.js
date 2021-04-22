@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import { UserSchema } from '../models/User.js';
 import { FollowListSchema } from '../models/FollowList';
+import { UserActivity } from '../models/UserActivity';
 const User = mongoose.model('user', UserSchema);
 const FollowList = mongoose.model('followList', FollowListSchema, 'followList');
-
 export default {
   Query: {
     getFollower: async (parent, { userId }, { models }) => {
@@ -30,7 +30,36 @@ export default {
       let followeeList = followList.map((data) => {
         return data.followee;
       });
+
       return followeeList;
+    },
+    getFolloweeActivity: async (parent, { userId }, { models }) => {
+      let user = await User.findById(userId);
+      let followList = await FollowList.find({
+        follower: user.id,
+        status: 'active',
+      });
+
+      let followeeIds = [];
+      followList.forEach((data) => {
+        followeeIds.push(data.followee);
+      });
+      const followeeActivities = await UserActivity.find({
+        userId: {
+          $in: followeeIds,
+        },
+      })
+        .populate('user')
+        .populate({
+          path: 'data',
+          populate: {
+            path: 'book',
+          },
+        })
+        .lean({ virtuals: true })
+        .sort({ createdAt: -1 })
+        .limit(20);
+      return followeeActivities;
     },
   },
   Mutation: {
