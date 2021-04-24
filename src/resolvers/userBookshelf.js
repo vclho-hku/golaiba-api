@@ -2,7 +2,9 @@ import mongoose from 'mongoose';
 import { ApolloError } from 'apollo-server-errors';
 import { BookSchema } from '../models/Book.js';
 import { UserSchema } from '../models/User.js';
+import { AddUserActivity } from '../models/UserActivity';
 import { UserBookshelfSchema } from '../models/UserBookshelf.js';
+import { ADD_TO_BOOKSHELF } from '../constant/UserActivityList';
 const User = mongoose.model('user', UserSchema);
 const Book = mongoose.model('book', BookSchema);
 const UserBookshelf = mongoose.model(
@@ -55,20 +57,22 @@ export default {
   },
   Mutation: {
     addToBookshelf: async (parent, { userId, bookId }, { models }) => {
-      await User.findById(userId);
-      await Book.findById(bookId);
+      const user = await User.findById(userId);
+      const book = await Book.findById(bookId);
 
       let userBook = await UserBookshelf.findOne({
-        userId: userId,
-        bookId: bookId,
+        userId: user.id,
+        bookId: book.id,
         status: 'active',
       });
       if (userBook == null) {
         userBook = await new UserBookshelf({
-          userId,
-          bookId,
+          userId: user.id,
+          bookId: book.id,
         });
         await userBook.save();
+        let data = { bookId: book.id };
+        AddUserActivity(user.id, ADD_TO_BOOKSHELF, data);
       }
       return userBook;
     },

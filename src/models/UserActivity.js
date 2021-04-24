@@ -10,6 +10,9 @@ const UserActivitySchema = new Schema(
     activity: { type: String, required: true },
     data: {
       bookId: { type: Schema.Types.ObjectId, ref: 'book' },
+      bookRating: { type: Number },
+      bookReview: { type: String },
+      followeeId: { type: Schema.Types.ObjectId, ref: 'user' },
     },
   },
   {
@@ -26,6 +29,13 @@ const UserActivity = mongoose.model(
 UserActivitySchema.virtual('user', {
   ref: User,
   localField: 'userId',
+  foreignField: '_id',
+  justOne: true,
+});
+
+UserActivitySchema.virtual('data.followee', {
+  ref: User,
+  localField: 'data.followeeId',
   foreignField: '_id',
   justOne: true,
 });

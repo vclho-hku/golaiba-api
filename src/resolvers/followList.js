@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import { UserSchema } from '../models/User.js';
 import { FollowListSchema } from '../models/FollowList';
 import { UserActivity } from '../models/UserActivity';
+import { AddUserActivity } from '../models/UserActivity';
+import { ADD_FOLLOWER } from '../constant/UserActivityList.js';
 const User = mongoose.model('user', UserSchema);
 const FollowList = mongoose.model('followList', FollowListSchema, 'followList');
 export default {
@@ -56,6 +58,12 @@ export default {
             path: 'book',
           },
         })
+        .populate({
+          path: 'data',
+          populate: {
+            path: 'followee',
+          },
+        })
         .lean({ virtuals: true })
         .sort({ createdAt: -1 })
         .limit(20);
@@ -78,6 +86,10 @@ export default {
           status: 'active',
         });
         followList.save();
+        let activityData = {
+          followeeId: followee.id,
+        };
+        AddUserActivity(user.id, ADD_FOLLOWER, activityData);
       }
       return followee;
     },

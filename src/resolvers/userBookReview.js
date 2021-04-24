@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
 import { BookSchema } from '../models/Book.js';
 import { UserSchema } from '../models/User.js';
+import { AddUserActivity } from '../models/UserActivity';
 import { UserBookReviewSchema } from '../models/UserBookReview.js';
+import { WRITTEN_BOOK_REVIEW } from '../constant/UserActivityList';
 const User = mongoose.model('user', UserSchema);
 const Book = mongoose.model('book', BookSchema);
+
 const UserBookReview = mongoose.model(
   'userBookReview',
   UserBookReviewSchema,
@@ -45,7 +48,7 @@ export default {
       { userId, bookId, userName, rating, review },
       { models },
     ) => {
-      await User.findById(userId);
+      const user = await User.findById(userId);
       let book = await Book.findById(bookId);
       let userBookReview = await UserBookReview.findOne({
         userId: userId,
@@ -62,6 +65,13 @@ export default {
           status: 'active',
         });
         userBookReview.save();
+        let activityData = {
+          bookId: book.id,
+          bookRating: rating,
+          bookReview: review,
+        };
+        AddUserActivity(user.id, WRITTEN_BOOK_REVIEW, activityData);
+
         if (rating) {
           let newBookRating =
             (book.rating * book.ratingCount + rating) / (book.ratingCount + 1);

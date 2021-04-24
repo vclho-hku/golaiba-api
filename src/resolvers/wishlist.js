@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { BookSchema } from '../models/Book.js';
 import { UserSchema } from '../models/User.js';
 import { AddUserActivity } from '../models/UserActivity';
+import { ADD_TO_WISHLIST } from '../constant/UserActivityList';
 const User = mongoose.model('user', UserSchema);
 const Book = mongoose.model('book', BookSchema);
 
@@ -33,7 +34,7 @@ export default {
         user.wishlist.push(book);
         user.save();
         let data = { bookId: book.id };
-        AddUserActivity(user.id, 'addToWishlist', data);
+        AddUserActivity(user.id, ADD_TO_WISHLIST, data);
       }
       return user;
     },

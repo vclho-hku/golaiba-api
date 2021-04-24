@@ -14,12 +14,13 @@ export default gql`
     user: User
     activity: String
     data: UserActivityContent
+    updatedAt: Date
   }
 
   type UserActivityContent {
     book: Book
-    followee: ID
-    review: String
-    rating: Int
+    bookRating: Float
+    bookReview: String
+    followee: User
   }
 `;
