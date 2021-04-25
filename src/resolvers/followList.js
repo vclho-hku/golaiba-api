@@ -86,6 +86,10 @@ export default {
           status: 'active',
         });
         followList.save();
+        user.followeeCount++;
+        user.save();
+        followee.followerCount++;
+        followee.save();
         let activityData = {
           followeeId: followee.id,
         };
