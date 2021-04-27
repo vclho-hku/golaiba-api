@@ -27,15 +27,21 @@ export default {
       return userBook;
     },
     getUserBookDetails: async (parent, { userBookId }, { models }) => {
-      let userBookDetails = await UserBookshelf.findById(userBookId).populate(
-        'bookId',
-      );
-      const newBookDetails = {
-        id: userBookDetails.id,
-        book: userBookDetails.bookId,
-        readingStatus: userBookDetails.readingStatus,
-      };
-      return newBookDetails;
+      let userBookDetails = await UserBookshelf.findById(userBookId)
+        .populate('book')
+        .populate({
+          path: 'book',
+          populate: {
+            path: 'authors',
+          },
+        })
+        .populate({
+          path: 'book',
+          populate: {
+            path: 'publisher',
+          },
+        });
+      return userBookDetails;
     },
     getUserBookshelf: async (parent, { userId }, { models }) => {
       let userBookshelf = await UserBookshelf.find({
