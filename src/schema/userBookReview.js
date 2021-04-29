@@ -20,8 +20,10 @@ export default gql`
     id: ID
     userId: ID
     bookId: ID
+    userAvatarImgUrl: String
     userName: String
     rating: Float
     review: String
+    updatedAt: Date
   }
 `;
