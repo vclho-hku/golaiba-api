@@ -45,7 +45,7 @@ export default {
   Mutation: {
     addUserBookReview: async (
       parent,
-      { userId, bookId, userName, rating, review },
+      { userId, bookId, rating, review },
       { models },
     ) => {
       const user = await User.findById(userId);
@@ -59,7 +59,8 @@ export default {
         userBookReview = await new UserBookReview({
           userId,
           bookId,
-          userName,
+          userName: user.name,
+          userAvatarImgUrl: user.avatarImgUrl.small,
           rating,
           review,
           status: 'active',
