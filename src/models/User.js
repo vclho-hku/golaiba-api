@@ -12,6 +12,7 @@ var UserSchema = new Schema(
     isSentNewsletter: { type: Boolean, default: false },
     followerCount: { type: Number, default: 0 },
     followeeCount: { type: Number, default: 0 },
+    bookCount: { type: Number, default: 0 },
     avatarImgUrl: {
       small: { type: String, default: null },
       medium: { type: String, default: null },

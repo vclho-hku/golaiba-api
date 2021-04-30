@@ -77,13 +77,15 @@ export default {
           bookId: book.id,
         });
         await userBook.save();
+        user.bookCount++;
+        user.save();
         let data = { bookId: book.id };
         AddUserActivity(user.id, ADD_TO_BOOKSHELF, data);
       }
       return userBook;
     },
     removeFromBookshelf: async (parent, { userId, bookId }, { models }) => {
-      await User.findById(userId);
+      let user = await User.findById(userId);
       await Book.findById(bookId);
 
       let userBook = await UserBookshelf.findOne({
@@ -93,7 +95,8 @@ export default {
       });
       userBook.status = 'removed';
       userBook.save();
-
+      user.bookCount--;
+      user.save();
       return userBook;
     },
     updateUserBookReadingStatus: async (

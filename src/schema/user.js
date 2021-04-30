@@ -18,7 +18,22 @@ export default gql`
     uid: String
     name: String
     email: String
+    followerCount: Int
+    followeeCount: Int
+    bookCount: Int
     wishlist: [Book]
+    avatarImgUrl: ImageSize
+    isSentNewsletter: Boolean
+    langauge: String
+    region: String
+    birthDate: Date
+    createdAt: Date
+  }
+
+  type ImageSize {
+    small: String
+    medium: String
+    large: String
   }
 
   input userData {
