@@ -8,7 +8,7 @@ var UserSchema = new Schema(
     birthDate: Date,
     gender: String,
     region: { type: String, default: 'hk' },
-    langauge: { type: String, default: 'zh_hk' },
+    language: { type: String, default: 'zh_hk' },
     isSentNewsletter: { type: Boolean, default: false },
     followerCount: { type: Number, default: 0 },
     followeeCount: { type: Number, default: 0 },

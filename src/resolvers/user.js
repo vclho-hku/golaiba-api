@@ -57,6 +57,18 @@ export default {
       }
       return user;
     },
+    updateUser: async (parent, { data }, { models }) => {
+      const uid = data.uid;
+      let user = await User.findOne({ uid });
+      user.name = data.name;
+      user.gender = data.gender;
+      user.birthDate = data.birthDate;
+      user.region = data.region;
+      user.language = data.language;
+      user.isSentNewsletter = data.isSentNewsletter;
+      user.save();
+      return user;
+    },
     addWishList: async (parent, { uid, bookId }, { models }) => {
       let user = await User.findOne({ uid });
       let found = user.wishlist.indexOf(bookId);

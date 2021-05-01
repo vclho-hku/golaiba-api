@@ -10,6 +10,7 @@ export default gql`
 
   extend type Mutation {
     createUser(data: userData!): User!
+    updateUser(data: userData!): User!
   }
 
   type User {
@@ -24,8 +25,9 @@ export default gql`
     wishlist: [Book]
     avatarImgUrl: ImageSize
     isSentNewsletter: Boolean
-    langauge: String
+    language: String
     region: String
+    gender: String
     birthDate: Date
     createdAt: Date
   }
@@ -40,5 +42,10 @@ export default gql`
     uid: String
     name: String
     email: String
+    isSentNewsletter: Boolean
+    language: String
+    region: String
+    gender: String
+    birthDate: Date
   }
 `;
