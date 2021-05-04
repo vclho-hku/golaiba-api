@@ -9,8 +9,16 @@ import elasticClient from '../elasticsearch-client';
 
 export default {
   Query: {
-    books: async (parent, args, { models }) => {
-      let books = await Book.find();
+    books: async (parent, { limit, offset }, { models }) => {
+      let returnLimit = 20;
+      let returnOffset = 0;
+      if (limit && limit > 0 && limit < 50) {
+        returnLimit = limit;
+      }
+      if (offset && offset > 0) {
+        returnOffset = offset;
+      }
+      let books = await Book.find().skip(returnOffset).limit(returnLimit);
       return books;
     },
     book: async (parent, { id }, { models }) => {

@@ -37,6 +37,7 @@ var BookSchema = new Schema(
       ref: 'book-series',
     },
     categories: [String],
+    tags: [{ type: String, default: [] }],
   },
   {
     timestamps: true,

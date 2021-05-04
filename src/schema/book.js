@@ -31,6 +31,7 @@ export default gql`
     imageUrl: ImageUrl
     authors: [Author]
     publisher: Publisher
+    tags: [String]
   }
 
   input bookData {
