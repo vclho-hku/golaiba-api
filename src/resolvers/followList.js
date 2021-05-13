@@ -13,9 +13,7 @@ export default {
       let followList = await FollowList.find({
         followee: user.id,
         status: 'active',
-      })
-        .populate('follower')
-        .select('follower -_id');
+      }).populate('follower');
       let followerList = followList.map((data) => {
         return data.follower;
       });
@@ -26,9 +24,7 @@ export default {
       let followList = await FollowList.find({
         follower: user.id,
         status: 'active',
-      })
-        .populate('followee')
-        .select('followee -_id');
+      }).populate('followee');
       let followeeList = followList.map((data) => {
         return data.followee;
       });
