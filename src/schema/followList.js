@@ -8,6 +8,7 @@ export default gql`
   }
   extend type Mutation {
     addFollowee(userId: ID!, followeeId: ID!): User
+    removeFollowee(userId: ID!, followeeId: ID!): User
   }
 
   type UserActivity {

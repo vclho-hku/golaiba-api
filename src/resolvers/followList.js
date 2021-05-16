@@ -93,5 +93,23 @@ export default {
       }
       return followee;
     },
+    removeFollowee: async (parent, { userId, followeeId }, { models }) => {
+      let user = await User.findById(userId);
+      let followee = await User.findById(followeeId);
+      let followList = await FollowList.findOne({
+        followee: followee.id,
+        follower: user.id,
+        status: 'active',
+      });
+      if (user && followee && followList) {
+        followList.status = 'removed';
+        followList.save();
+        user.followeeCount--;
+        user.save();
+        followee.followerCount--;
+        followee.save();
+      }
+      return followee;
+    },
   },
 };
