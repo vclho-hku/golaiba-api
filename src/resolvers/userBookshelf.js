@@ -70,7 +70,7 @@ export default {
         })
         .unwind('tags')
         .group({ _id: '$tags', count: { $sum: 1 } })
-        .limit(5);
+        .limit(10);
 
       userBookTagsList.forEach((tagObject) => {
         result.push(tagObject._id);
