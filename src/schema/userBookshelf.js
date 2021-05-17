@@ -6,6 +6,7 @@ export default gql`
     getUserBook(userId: ID!, bookId: ID!): UserBook
     getUserBookDetails(userBookId: ID!): UserBook
     getUserBookshelf(userId: ID!): [UserBook]
+    getUserTags(userId: ID!): [String]
   }
 
   extend type Mutation {

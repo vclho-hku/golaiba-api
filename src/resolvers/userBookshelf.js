@@ -61,6 +61,22 @@ export default {
       });
       return result;
     },
+    getUserTags: async (parent, { userId }, { models }) => {
+      let result = [];
+      let userBookTagsList = await UserBookshelf.aggregate()
+        .match({
+          userId: mongoose.Types.ObjectId(userId),
+          status: 'active',
+        })
+        .unwind('tags')
+        .group({ _id: '$tags', count: { $sum: 1 } })
+        .limit(5);
+
+      userBookTagsList.forEach((tagObject) => {
+        result.push(tagObject._id);
+      });
+      return result;
+    },
   },
   Mutation: {
     addToBookshelf: async (parent, { userId, bookId }, { models }) => {
