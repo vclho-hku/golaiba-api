@@ -55,6 +55,7 @@ export default {
           id: inputBook.id,
           book: inputBook.bookId,
           readingStatus: inputBook.readingStatus,
+          tags: inputBook.tags,
         };
         return newBook;
       });

@@ -26,5 +26,6 @@ export default gql`
     book: Book
     readingStatus: String
     status: String
+    tags: [String]
   }
 `;
