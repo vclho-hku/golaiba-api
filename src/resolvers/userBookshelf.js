@@ -84,6 +84,35 @@ export default {
       }
       return userBook;
     },
+    addUserBookTag: async (parent, { userId, bookId, tag }, { models }) => {
+      await User.findById(userId);
+      await Book.findById(bookId);
+      let userBook = await UserBookshelf.findOne({
+        userId: userId,
+        bookId: bookId,
+        status: 'active',
+      });
+      if (userBook) {
+        userBook.tags.push(tag);
+        userBook.save();
+      }
+      return userBook;
+    },
+    removeUserBookTag: async (parent, { userId, bookId, tag }, { models }) => {
+      await User.findById(userId);
+      await Book.findById(bookId);
+      let userBook = await UserBookshelf.findOne({
+        userId: userId,
+        bookId: bookId,
+        status: 'active',
+      });
+      if (userBook) {
+        userBook.tags = userBook.tags.filter((tagItem) => tagItem !== tag);
+        userBook.save();
+      }
+      return userBook;
+    },
+
     removeFromBookshelf: async (parent, { userId, bookId }, { models }) => {
       let user = await User.findById(userId);
       await Book.findById(bookId);
