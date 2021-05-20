@@ -28,9 +28,61 @@ export default {
 
       return book;
     },
-    getBookBySearch: async (parent, { keywords }, { models }) => {
+    getBookBySearch: async (
+      parent,
+      { keywords, limit, offset },
+      { models },
+    ) => {
+      // let test = await elasticClient.cat.indices({});
+      // console.log(test);
+      // await elasticClient.indices.delete({
+      //   index: 'books',
+      // });
+
+      // await elasticClient.indices.create({
+      //   index: 'books',
+      // });
+      // let book = await Book.findById('5fea03c9a5b57b7bf0b51bcf')
+      //   .populate('authors')
+      //   .populate('publisher');
+      // await elasticClient.index({
+      //   index: 'books',
+      //   id: book.id,
+      //   body: { book: book },
+      // });
+      // return [];
+
+      // await elasticClient.indices.putMapping({
+      //   index: 'books',
+      //   body: {
+      //     properties: {
+      //       book: {
+      //         properties: {
+      //           title: {
+      //             type: 'text',
+      //             analyzer: 'ik_max_word',
+      //             search_analyzer: 'ik_smart',
+      //             fields: {
+      //               keyword: {
+      //                 type: 'keyword',
+      //                 ignore_above: 256,
+      //               },
+      //             },
+      //           },
+      //         },
+      //       },
+      //     },
+      //   },
+      // });
+
+      // let mapping = await elasticClient.indices.getMapping({
+      //   index: 'books',
+      // });
+      // console.log(mapping.body.books.mappings);
       let searchResult = await elasticClient.search({
         index: 'books',
+        from: offset,
+        size: limit,
         body: {
           query: {
             bool: {
