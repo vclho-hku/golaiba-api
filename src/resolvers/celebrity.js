@@ -22,6 +22,36 @@ export default {
         });
       return celebrity;
     },
+    starCelebrityList: async (parent, { id }, { models }) => {
+      let celebrityList = await Celebrity.find({
+        isStarCelebrity: true,
+      })
+        .populate({
+          path: 'recommendBooks',
+          // match: { isKeyRecommend: true },
+          populate: {
+            path: 'book',
+          },
+        })
+        .populate({
+          path: 'recommendBooks.book',
+          populate: {
+            path: 'authors',
+          },
+        });
+
+      // let celebrityList = await Celebrity.aggregate()
+      //   .match({
+      //     isStarCelebrity: true,
+      //   })
+      //   .unwind('recommendBooks')
+      //   .match({
+      //     'recommendBooks.isKeyRecommend': true,
+      //   })
+      //   .group({ _id: '$_id', recommendBooks: { $push: '$recommendBooks' } });
+
+      return celebrityList;
+    },
   },
   Mutation: {
     createCelebrity: async (parent, { name, data }, { models }) => {

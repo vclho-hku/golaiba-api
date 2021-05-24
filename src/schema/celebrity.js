@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
   extend type Query {
     celebrity(id: ID!): Celebrity
+    starCelebrityList: [Celebrity]
   }
 
   extend type Mutation {
@@ -21,7 +22,7 @@ export default gql`
     name: MultiLang
     isStarCelebrity: Boolean
     isPrize: Boolean
-    suggestBooks: [CelebrityRecommendBook]
+    recommendBooks: [CelebrityRecommendBook]
   }
 
   type CelebrityRecommendBook {
