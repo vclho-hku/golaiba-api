@@ -9,6 +9,7 @@ const CelebritySchema = new Schema(
       ja_jp: String,
     },
     isStarCelebrity: { type: Boolean, default: false },
+    isStarPrize: { type: Boolean, default: false },
     isPrize: { type: Boolean, default: false },
     recommendBooks: [
       {

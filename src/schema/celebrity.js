@@ -4,6 +4,7 @@ export default gql`
   extend type Query {
     celebrity(id: ID!): Celebrity
     starCelebrityList: [Celebrity]
+    starPrizeList: [Celebrity]
   }
 
   extend type Mutation {
@@ -21,6 +22,7 @@ export default gql`
     id: ID
     name: MultiLang
     isStarCelebrity: Boolean
+    isStarPrize: Boolean
     isPrize: Boolean
     recommendBooks: [CelebrityRecommendBook]
   }
@@ -34,6 +36,7 @@ export default gql`
 
   input celebrityData {
     isStarCelebrity: Boolean
+    isStarPrize: Boolean
     isPrize: Boolean
   }
 `;

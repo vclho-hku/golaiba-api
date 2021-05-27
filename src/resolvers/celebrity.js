@@ -52,6 +52,25 @@ export default {
 
       return celebrityList;
     },
+    starPrizeList: async (parent, { id }, { models }) => {
+      let prizeList = await Celebrity.find({
+        isStarPrize: true,
+        isPrize: true,
+      })
+        .populate({
+          path: 'recommendBooks',
+          populate: {
+            path: 'book',
+          },
+        })
+        .populate({
+          path: 'recommendBooks.book',
+          populate: {
+            path: 'authors',
+          },
+        });
+      return prizeList;
+    },
   },
   Mutation: {
     createCelebrity: async (parent, { name, data }, { models }) => {
